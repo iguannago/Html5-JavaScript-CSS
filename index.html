@@ -1,8 +1,84 @@
 <html>
 	<head>
 		<style>
-			ul {
-   				list-style: none;
+
+		footer {
+            background-color: white;
+            color: gray;
+            width: 100%;
+            bottom: 0;
+            position: fixed;
+        }
+
+
+
+
+		h1 {
+width: 498px;
+height: 64px;
+background: url(images/h1-bg.jpg);
+color: #fff;
+font-family: bebas;
+padding: 17px 0px 0px 78px;
+letter-spacing: 1px;
+font-size: 2.2em;
+margin: 0 auto;
+}
+
+		/* Centre the page */
+.body {
+    display:block;
+    margin:0 auto;
+    width:576px;
+}
+
+/* Centre the form within the page */
+form {
+    margin:0 auto;
+    width:459px;
+}
+
+/* Style the text boxes */
+input {
+    width:439px;
+    height:27px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#3a3a3a;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+input:focus {
+    border:1px solid #97d6eb;
+}
+
+#submit {
+    width:135px;
+    height:45px;
+    background:url(images/submitButton.jpg);
+    text-indent:-9999px;
+    border:none;
+    margin-top:20px;
+    cursor:pointer;
+}
+
+	#submit:hover {
+	    opacity:.9;
+	}
+
+
+		label {
+    display:block;
+    margin-top:20px;
+    letter-spacing:2px;
+}
+			ul { 
+				list-style: none;
    				margin: 0;
    				padding: 0;
    			}
@@ -39,17 +115,7 @@ ul.example li.placeholder:before {
 
 $(document).ready(function(){
 
-$("input#submitButton2").click(function() {
-
-$.ajax({
-  url: 'http://www.google.com',
-  success:function(data){
-    alert(data);
-  }
-});
-});
-
-  $("input#submitButton").click(function(){
+  $("input#submit").click(function(){
     
     $.ajax({
       type: 'POST',
@@ -74,13 +140,13 @@ $.ajax({
 		
 	</head>
 	<body>
-		<form id="myForm" name="myForm" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" method="post" 
+ 		<header class="body">
+ 			<h1>Feature Form</h1>
+    	</header>
+
+    	<section class="body">
+    		<form id="myForm" name="myForm" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" method="post" 
 		action="/">
-			<header>
-				<h2>Feature Creating Form</h2>
-				<div><h3>Fill in the form to create a new Feature</h3></div>
-				
-			</header>
 			<div id="content" class="table">
 			<ul class="example">
 				<li>
@@ -88,7 +154,7 @@ $.ajax({
 					<label>
 						Head
 					</label>
-						<input class="text" type="text" value="" placeholder="write here the Head value" required/>
+						<input class="text" type="text" value="" placeholder="Type Here" required>
 					</div>
 				</li>
 				<li>
@@ -96,18 +162,23 @@ $.ajax({
 					<label>
 						Sell
 					</label>
-						<input class="text" type="text" value="" placeholder="write here the Sell value" required/>
+						<input class="text" type="text" value="" placeholder="Type Here" required>
 					</div>
 				</li>
 			</ul>
 			</div>
 			<ul>
 				<li>
-					<input id="submitButton" type="submit" value="Save" />
+					<input id="submit" name="submit" type="submit" value="Submit">
 				</li>
 			</ul>	
 		</form>
-		<input id="submitButton2" type="submit" value="get request to google.com" />	
+
+    	</section>
+
+    	<footer class="body">
+    		<p>HTML5 + CSS3 + JQuery </p>
+    	</footer>
 	</body>
 </html>
 
