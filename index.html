@@ -35,13 +35,47 @@ ul.example li.placeholder:before {
 		<script type="text/javascript">
 		$(function  () {
   $("ul.example").sortable()
-})
-			
+});
+
+$(document).ready(function(){
+
+$("input#submitButton2").click(function() {
+
+$.ajax({
+  url: 'http://www.google.com',
+  success:function(data){
+    alert(data);
+  }
+});
+});
+
+  $("input#submitButton").click(function(){
+    
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:9200/journal/feature/1',
+      // The key needs to match your method's input parameter (case-sensitive).
+      data: JSON.stringify({ sell: '4', head: '4' }),
+      beforeSend:function(){
+    // this is where we append a loading image
+    $('#ajax-panel').html('<div class="loading"><img src="http://www.aflglobal.com/productionFiles/images/iLoading.aspx" alt="Loading..." /></div>');
+  },
+      contentType: 'pplication/json; charset=utf-8',
+      dataType: 'json',
+      success: function(data){alert(data);},
+      failure: function(errMsg) {
+        alert(errMsg);
+      }
+    });
+  });
+});
+
 		</script>
+		
 	</head>
 	<body>
-		<form name="featureForm" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" method="post" action="">
-  
+		<form id="myForm" name="myForm" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" method="post" 
+		action="/">
 			<header>
 				<h2>Feature Creating Form</h2>
 				<div><h3>Fill in the form to create a new Feature</h3></div>
@@ -69,10 +103,11 @@ ul.example li.placeholder:before {
 			</div>
 			<ul>
 				<li>
-					<input type="submit" value="Save"/>
+					<input id="submitButton" type="submit" value="Save" />
 				</li>
 			</ul>	
-		</form>	
+		</form>
+		<input id="submitButton2" type="submit" value="get request to google.com" />	
 	</body>
 </html>
 
