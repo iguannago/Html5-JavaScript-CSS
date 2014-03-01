@@ -1,0 +1,99 @@
+footer {
+            background-color: white;
+            color: gray;
+            width: 100%;
+            bottom: 0;
+            position: fixed;
+        }
+
+
+
+
+		h1 {
+width: 498px;
+height: 64px;
+background: url(../images/h1-bg.jpg);
+color: #fff;
+font-family: bebas;
+padding: 17px 0px 0px 78px;
+letter-spacing: 1px;
+font-size: 2.2em;
+margin: 0 auto;
+}
+
+		/* Centre the page */
+.body {
+    display:block;
+    margin:0 auto;
+    width:576px;
+}
+
+/* Centre the form within the page */
+form {
+    margin:0 auto;
+    width:459px;
+}
+
+/* Style the text boxes */
+input {
+    width:439px;
+    height:27px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#3a3a3a;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+input:focus {
+    border:1px solid #97d6eb;
+}
+
+#submit {
+    width:135px;
+    height:45px;
+    background:url(../images/submitButton.jpg);
+    text-indent:-9999px;
+    border:none;
+    margin-top:20px;
+    cursor:pointer;
+}
+
+	#submit:hover {
+	    opacity:.9;
+	}
+
+
+		label {
+    display:block;
+    margin-top:20px;
+    letter-spacing:2px;
+}
+			ul { 
+				list-style: none;
+   				margin: 0;
+   				padding: 0;
+   			}
+
+   			body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ul.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ul.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
