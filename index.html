@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<style>
+			ul {
+   				list-style: none;
+   				margin: 0;
+   				padding: 0;
+   			}
+
+   			input.text {
+   				width: 150px;
+   			}
+
+   			div.table {
+				width:220px;
+				padding:10px;
+				border:5px solid gray;
+				margin:0px;
+			}
+
+
+   			#makeMeDraggable { width: 150px; }
+   			#makeMeDraggable.ui-draggable-dragging { background: green; }
+
+   			#makeMeDraggable2 { width: 150px; }
+   			#makeMeDraggable2.ui-draggable-dragging { background: green; }
+		</style>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+	
+		<script type="text/javascript">
+			$( init );
+ 
+			function init() {
+  				$('#makeMeDraggable').draggable({
+  					containment: '#content',
+    				cursor: 'move',
+    				snap: '#content'
+  				} );
+
+  				$('#makeMeDraggable2').draggable({
+  					containment: '#content',
+    				cursor: 'move',
+    				snap: '#content'
+  				} );
+			}
+		</script>
+	</head>
+	<body>
+		<form name="featureForm" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" method="post" action="">
+  
+			<header>
+				<h2>Feature Creating Form</h2>
+				<div><h3>Fill in the form to create a new Feature</h3></div>
+				
+			</header>
+			<div id="content" class="table">
+			<ul>
+				<li>
+					<div id="makeMeDraggable">
+					<label>
+						Head
+					</label>
+						<input class="text" type="text" value="" placeholder="write here the Head value" required/>
+					</div>
+				</li>
+				<li>
+					<div id="makeMeDraggable2">
+					<label>
+						Sell
+					</label>
+						<input class="text" type="text" value="" placeholder="write here the Sell value" required/>
+					</div>
+				</li>
+			</ul>
+			</div>
+			<ul>
+				<li>
+					<input type="submit" value="Save"/>
+				</li>
+			</ul>
+			
+		</form>		
+	</body>
+</html>
+
