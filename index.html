@@ -29,20 +29,69 @@ $("#dialog-message").dialog({
     }
 });
 
+$("#dialog-failure").dialog({
+    autoOpen: false,
+    resizable: false,
+    position: 'center',
+    stack: true,
+    height: 'auto',
+    width: 'auto',
+    title: 'Failure',
+    modal: true,
+    buttons: {
+    	Ok: function () {
+    		$(this).dialog("close");
+    	}
+    }
+});
+
+
+
+
 
 		$(function  () {
   			$("ul.example").sortable()
 		});
 
+$.fn.serializeObject = function()
+{
+   var o = {};
+   var a = this.serializeArray();
+   $.each(a, function() {
+       if (o[this.name]) {
+           if (!o[this.name].push) {
+               o[this.name] = [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name] = this.value || '';
+       }
+   });
+   return o;
+};
+
   $("#myForm").submit(function(e){
   	e.preventDefault();
+  	var data = {}
+    var Form = this;
 
+    //Gathering the Data
+    //and removing undefined keys(buttons)
+    $.each(this.elements, function(i, v){
+            var input = $(v);
+        if (input.attr("name") != "submit") {
+        data[input.attr("name")] = input.val();
+        delete data["undefined"];	
+        }
+        
+    });
     $("#spinner").show();
     $.ajax({
       type: 'POST',
       url: 'http://localhost:9200/journal/feature/1',
       // The key needs to match your method's input parameter (case-sensitive).
-      data: JSON.stringify({ sell: '4', head: '4' }),
+      data: JSON.stringify(data),
+      context: Form,
       contentType: 'pplication/json; charset=utf-8',
       dataType: 'json',
       success: function(data){
@@ -50,7 +99,7 @@ $("#dialog-message").dialog({
       	$("#dialog-message").dialog('open'); 
       },
       failure: function(errMsg) {
-        alert(errMsg);
+      	$("#dialog-failure").empty().html(response).dialog('open'); 
       },
     });
   });
@@ -74,7 +123,7 @@ $("#dialog-message").dialog({
 					<label>
 						Head
 					</label>
-						<input id="head" class="text" type="text" value="" placeholder="Type Here" required>
+						<input id="head" name="head" class="text" type="text" value="" placeholder="Type Here" required>
 					</div>
 				</li>
 				<li>
@@ -82,7 +131,7 @@ $("#dialog-message").dialog({
 					<label>
 						Sell
 					</label>
-						<input id="sell" class="text" type="text" value="" placeholder="Type Here" required>
+						<input id="sell" name="sell" class="text" type="text" value="" placeholder="Type Here" required>
 					</div>
 				</li>
 			</ul>
@@ -101,6 +150,9 @@ $("#dialog-message").dialog({
 				<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
 				Feature created successfully.
 			</p>
+		</div>
+
+		<div id="dialog-failure">
 		</div>
 
     	</section>
