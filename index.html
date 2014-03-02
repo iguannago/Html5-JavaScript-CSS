@@ -1,38 +1,61 @@
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="css/featureFormStyle.css">
+		<link rel="stylesheet" type="text/css" href="css/featureFormStyle.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		
 		<script src='js/jquery-sortable.js'></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+		<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+		<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 		
 		<script type="text/javascript">
-		$(function  () {
-  $("ul.example").sortable()
-});
 
 $(document).ready(function(){
 
-  $("input#submit").click(function(){
-    
+$("#dialog-message").dialog({
+    autoOpen: false,
+    resizable: false,
+    position: 'center',
+    stack: true,
+    height: 'auto',
+    width: 'auto',
+    title: 'Confirmation',
+    modal: true,
+    buttons: {
+    	Ok: function () {
+    		$(this).dialog("close");
+    	}
+    }
+});
+
+
+		$(function  () {
+  			$("ul.example").sortable()
+		});
+
+  $("#myForm").submit(function(e){
+  	e.preventDefault();
+
+    $("#spinner").show();
     $.ajax({
       type: 'POST',
       url: 'http://localhost:9200/journal/feature/1',
       // The key needs to match your method's input parameter (case-sensitive).
       data: JSON.stringify({ sell: '4', head: '4' }),
-      beforeSend:function(){
-    // this is where we append a loading image
-    $('#ajax-panel').html('<div class="loading"><img src="http://www.aflglobal.com/productionFiles/images/iLoading.aspx" alt="Loading..." /></div>');
-  },
       contentType: 'pplication/json; charset=utf-8',
       dataType: 'json',
-      success: function(data){alert(data);},
+      success: function(data){
+      	$("#spinner").hide();
+      	$("#dialog-message").dialog('open'); 
+      },
       failure: function(errMsg) {
         alert(errMsg);
-      }
+      },
     });
   });
 });
+
 
 		</script>
 		
@@ -43,8 +66,7 @@ $(document).ready(function(){
     	</header>
 
     	<section class="body">
-    		<form id="myForm" name="myForm" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" method="post" 
-		action="/">
+    		<form id="myForm" name="myForm" accept-charset="UTF-8" autocomplete="off" enctype="" method="" action="/">
 			<div id="content" class="table">
 			<ul class="example">
 				<li>
@@ -52,7 +74,7 @@ $(document).ready(function(){
 					<label>
 						Head
 					</label>
-						<input class="text" type="text" value="" placeholder="Type Here" required>
+						<input id="head" class="text" type="text" value="" placeholder="Type Here" required>
 					</div>
 				</li>
 				<li>
@@ -60,7 +82,7 @@ $(document).ready(function(){
 					<label>
 						Sell
 					</label>
-						<input class="text" type="text" value="" placeholder="Type Here" required>
+						<input id="sell" class="text" type="text" value="" placeholder="Type Here" required>
 					</div>
 				</li>
 			</ul>
@@ -71,6 +93,15 @@ $(document).ready(function(){
 				</li>
 			</ul>	
 		</form>
+		<div id="spinner">
+    		<img src="images/ajax-loader.gif" alt="Loading..."/>
+		</div>
+		<div id="dialog-message">
+			<p>
+				<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+				Feature created successfully.
+			</p>
+		</div>
 
     	</section>
 
